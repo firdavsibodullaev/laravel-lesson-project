@@ -22,4 +22,11 @@ class LoginController extends Controller
 
         return redirect()->route('admin');
     }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        return redirect()->route('login');
+    }
 }
