@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,26 +17,34 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::group([
+    'prefix' => 'admin',
+    'as' => 'admin.',
+    'middleware' => 'auth'
+], function() {
 
-Route::get('admin', [MainController::class, 'index'])
-->name('admin')
-->middleware('auth');
+    Route::get('', [MainController::class, 'index'])->name('index');    
 
-Route::get('admin/user', [UserController::class, 'index'])
-->name('admin.user.index')
-->middleware('auth');
+    Route::group([
+        'prefix' => 'user',
+        'as' => 'user.'
+    ], function () {
+        Route::get('', [UserController::class, 'index'])->name('index');
+        
+        Route::get('show/{id}', [UserController::class, 'show'])->name('show');
+        
+        Route::get('edit/{id}', [UserController::class, 'edit'])->name('edit');
+        
+        Route::post('update/{id}', [UserController::class, 'update'])->name('update');
+        
+        Route::get('delete/{id}', [UserController::class, 'delete'])->name('delete');
+    });
+    
+    Route::get('category', [CategoryController::class, 'index'])->name('category.index');
+    Route::get('category/create', [CategoryController::class, 'create'])->name('category.create');
+    Route::post('category', [CategoryController::class, 'store'])->name('category.store');
+});
 
-Route::get('admin/user/edit/{id}', [UserController::class, 'edit'])
-->name('admin.user.edit')
-->middleware('auth');
-
-Route::post('admin/user/update/{id}', [UserController::class, 'update'])
-->name('admin.user.update')
-->middleware('auth');
-
-Route::get('admin/user/delete/{id}', [UserController::class, 'delete'])
-->name('admin.user.delete')
-->middleware('auth');
 
 Route::get('login', [LoginController::class, 'showLoginForm'])
 ->name('showLoginForm')

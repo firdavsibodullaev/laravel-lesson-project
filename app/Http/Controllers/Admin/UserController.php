@@ -17,6 +17,19 @@ class UserController extends Controller
         ]);
     }
 
+    public function show($id)
+    {
+        $user = User::find($id);
+
+        if (is_null($user)) {
+            abort(404);
+        }
+
+        return view('admin.user.show',[
+            'user' => $user
+        ]);
+    }
+
     public function edit($id)
     {
         $user = User::find($id);

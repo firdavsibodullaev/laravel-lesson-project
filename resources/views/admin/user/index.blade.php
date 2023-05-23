@@ -17,8 +17,8 @@
             <td>{{ $user->name }}</td>
             <td>{{ $user->email }}</td>
             <td>
-                {{-- <a href="{{ route('admin.user.show', $user->id) }}">Посмотреть</a>  --}}
-                {{-- <br> --}}
+                <a href="{{ route('admin.user.show', $user->id) }}">Посмотреть</a> 
+                <br>
                 <a href="{{ route('admin.user.edit', $user->id) }}">Изменить</a> 
                 <br>
                 <a href="{{ route('admin.user.delete', $user->id) }}">Удалить</a>
