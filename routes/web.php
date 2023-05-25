@@ -17,33 +17,41 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::group([
-    'prefix' => 'admin',
-    'as' => 'admin.',
-    'middleware' => 'auth'
-], function() {
+Route::get('admin', [MainController::class, 'index'])
+->middleware('auth')
+->name('admin.index');    
 
-    Route::get('', [MainController::class, 'index'])->name('index');    
 
-    Route::group([
-        'prefix' => 'user',
-        'as' => 'user.'
-    ], function () {
-        Route::get('', [UserController::class, 'index'])->name('index');
-        
-        Route::get('show/{id}', [UserController::class, 'show'])->name('show');
-        
-        Route::get('edit/{id}', [UserController::class, 'edit'])->name('edit');
-        
-        Route::post('update/{id}', [UserController::class, 'update'])->name('update');
-        
-        Route::get('delete/{id}', [UserController::class, 'delete'])->name('delete');
-    });
-    
-    Route::get('category', [CategoryController::class, 'index'])->name('category.index');
-    Route::get('category/create', [CategoryController::class, 'create'])->name('category.create');
-    Route::post('category', [CategoryController::class, 'store'])->name('category.store');
-});
+Route::get('adm
+in/user', [UserController::class, 'index'])
+->middleware('auth')
+->name('admin.index');
+
+Route::get('admin/user/show/{id}', [UserController::class, 'show'])
+->middleware('auth')
+->name('admin.user.show');
+
+Route::get('admin/user/edit/{id}', [UserController::class, 'edit'])
+->middleware('auth')
+->name('admin.user.edit');
+
+Route::post('admin/user/update/{id}', [UserController::class, 'update'])
+->middleware('auth')
+->name('admin.user.update');
+
+Route::get('admin/user/delete/{id}', [UserController::class, 'delete'])
+->middleware('auth')
+->name('admin.user.delete');
+
+Route::get('admin/category', [CategoryController::class, 'index'])
+->middleware('auth')
+->name('admin.category.index');
+Route::get('admin/category/create', [CategoryController::class, 'create'])
+->middleware('auth')
+->name('admin.category.create');
+Route::post('admin/category', [CategoryController::class, 'store'])
+->middleware('auth')
+->name('admin.category.store');
 
 
 Route::get('login', [LoginController::class, 'showLoginForm'])
