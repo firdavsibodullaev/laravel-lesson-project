@@ -22,10 +22,9 @@ Route::get('admin', [MainController::class, 'index'])
 ->name('admin.index');    
 
 
-Route::get('adm
-in/user', [UserController::class, 'index'])
+Route::get('admin/user', [UserController::class, 'index'])
 ->middleware('auth')
-->name('admin.index');
+->name('admin.user.index');
 
 Route::get('admin/user/show/{id}', [UserController::class, 'show'])
 ->middleware('auth')
@@ -46,12 +45,27 @@ Route::get('admin/user/delete/{id}', [UserController::class, 'delete'])
 Route::get('admin/category', [CategoryController::class, 'index'])
 ->middleware('auth')
 ->name('admin.category.index');
+
 Route::get('admin/category/create', [CategoryController::class, 'create'])
 ->middleware('auth')
 ->name('admin.category.create');
+
 Route::post('admin/category', [CategoryController::class, 'store'])
 ->middleware('auth')
 ->name('admin.category.store');
+
+Route::get('admin/category/edit/{id}', [CategoryController::class, 'edit'])
+->middleware('auth')
+->name('admin.category.edit');
+
+
+Route::post('admin/category/update/{id}', [CategoryController::class,'update'])
+->middleware('auth')
+->name('admin.category.update');
+
+
+
+
 
 
 Route::get('login', [LoginController::class, 'showLoginForm'])

@@ -29,4 +29,25 @@ class CategoryController extends Controller
 
         return redirect()->route('admin.category.index');
     }
+
+    public function edit($id) {
+        $category = Category::find($id);
+
+        if (! $category) {
+            abort(404);
+        }
+
+        return view('admin.category.edit', [
+            'category_detail' => $category
+        ]);
+    }
+
+    public function update(Request $request, $id) {
+        $category = Category::find($id);
+
+        $category->title = $request->title;
+        $category->save();
+
+        return redirect()->back();
+    }
 }

@@ -20,7 +20,7 @@ class LoginController extends Controller
             'password' => $request->password
         ]);
 
-        return redirect()->route('admin');
+        return redirect()->route('admin.index');
     }
 
     public function logout()
