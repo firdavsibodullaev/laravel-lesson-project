@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
@@ -63,10 +64,21 @@ Route::post('admin/category/update/{id}', [CategoryController::class,'update'])
 ->middleware('auth')
 ->name('admin.category.update');
 
+Route::get('admin/article',[ArticleController::class, 'index'])
+->middleware('auth')
+->name('admin.article.index');
 
+Route::get('admin/article/create', [ArticleController::class, 'create'])
+->middleware('auth')
+->name('admin.article.create');
 
+Route::post('admin/article/store', [ArticleController::class, 'store'])
+->middleware('auth')
+->name('admin.article.store');
 
-
+Route::get('admin/article/show/{id}', [ArticleController::class, 'show'])
+->middleware('auth')
+->name('admin.article.show');
 
 Route::get('login', [LoginController::class, 'showLoginForm'])
 ->name('showLoginForm')
@@ -87,3 +99,5 @@ Route::get('register', [RegisterController::class, 'showRegisterForm'])
 Route::post('register', [RegisterController::class, 'register'])
 ->middleware('guest')
 ->name('registerUser');
+
+
