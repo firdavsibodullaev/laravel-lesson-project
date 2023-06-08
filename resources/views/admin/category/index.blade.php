@@ -17,6 +17,8 @@
                 <td>{{$category->id}}</td>
                 <td>{{$category->title}}</td>
                 <td>
+                    <a href="{{route('admin.category.show', $category->id)}}">Смотреть</a>
+                    <br>
                     <a href="{{route('admin.category.edit', $category->id)}}">Изменить</a>
                 </td>
             </tr>

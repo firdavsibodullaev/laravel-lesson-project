@@ -47,6 +47,10 @@ Route::get('admin/category', [CategoryController::class, 'index'])
 ->middleware('auth')
 ->name('admin.category.index');
 
+Route::get('admin/category/{id}/show', [CategoryController::class, 'show'])
+->middleware('auth')
+->name('admin.category.show');
+
 Route::get('admin/category/create', [CategoryController::class, 'create'])
 ->middleware('auth')
 ->name('admin.category.create');

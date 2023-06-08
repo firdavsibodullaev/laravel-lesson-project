@@ -1,6 +1,7 @@
 @extends('admin.parts.layout')
 @section('title', 'Maqolalar')
 @section('content')
+@dd($article->category)
 <div>
     <img src="/storage/{{$article->image}}" class="w-100" alt="">
 </div>
@@ -8,6 +9,9 @@
 <h5 class="text-justify">{{$article->short_description}}</h5>
 <div class="mt-5 ck-content">
     {!!$article->body !!}
+</div>
+<div>
+    Категория: {{$article->category->title}}
 </div>
 @endsection
 
