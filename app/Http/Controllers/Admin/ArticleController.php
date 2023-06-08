@@ -30,6 +30,7 @@ class ArticleController extends Controller
     public function create()
     {
         $categories = Category::get();
+
         return view('admin.article.create',[
             'categories' => $categories
         ]);
@@ -37,6 +38,18 @@ class ArticleController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required|string|max:100',
+            'short_description' => 'required|string|max:400',
+            'category_id' => 'required|integer|max_digits:11',
+            'published_at' => 'required|date',
+            'is_actual' => 'nullable|string',
+            'edition_choice' => 'nullable|string',
+            'is_carousel' => 'nullable|string',
+            'body' => 'required|string',
+            'image' => 'required|file|mimes:jpg,jpeg,png|max:' . (5 * 1024)
+        ]);
+        
         $file = $request->file('image');
         
         $image_path = $file->store('articles', ['disk' => 'public']);
