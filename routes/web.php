@@ -6,8 +6,9 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Frontend\MainController as FrontendMainController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Middleware\CheckMiddleware;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,12 +20,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('admin', [MainController::class, 'index'])
-->middleware('auth')
+->middleware(['auth'])
 ->name('admin.index');    
 
 
 Route::get('admin/user', [UserController::class, 'index'])
-->middleware('auth')
+->middleware(['auth'])
 ->name('admin.user.index');
 
 Route::get('admin/user/show/{id}', [UserController::class, 'show'])
@@ -44,7 +45,7 @@ Route::get('admin/user/delete/{id}', [UserController::class, 'delete'])
 ->name('admin.user.delete');
 
 Route::get('admin/category', [CategoryController::class, 'index'])
-->middleware('auth')
+->middleware(['auth'])
 ->name('admin.category.index');
 
 Route::get('admin/category/{id}/show', [CategoryController::class, 'show'])
@@ -52,7 +53,7 @@ Route::get('admin/category/{id}/show', [CategoryController::class, 'show'])
 ->name('admin.category.show');
 
 Route::get('admin/category/create', [CategoryController::class, 'create'])
-->middleware('auth')
+->middleware(['auth'])
 ->name('admin.category.create');
 
 Route::post('admin/category', [CategoryController::class, 'store'])
@@ -105,3 +106,17 @@ Route::post('register', [RegisterController::class, 'register'])
 ->name('registerUser');
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+Route::get('', [FrontendMainController::class, 'index'])->name('frontend.index');
+Route::get('{id}', [FrontendMainController::class, 'show'])->name('frontend.show');
